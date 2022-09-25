@@ -5,9 +5,12 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./Lottery.sol";
 
 contract LotteryNFT is ERC721 {
-    constructor() ERC721("CHEESE", "CHE") {}
 
     address public lotteryAddress;
+
+    constructor() ERC721("CHEESE", "CHE") {
+        lotteryAddress = msg.sender;
+    }
 
     modifier onlyLottery(address _account) {
         require(
@@ -22,6 +25,5 @@ contract LotteryNFT is ERC721 {
         onlyLottery(_account)
     {
         _safeMint(_account, _id);
-        lotteryAddress = msg.sender;
     }
 }
